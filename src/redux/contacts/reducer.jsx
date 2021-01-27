@@ -5,7 +5,7 @@ import actions from './actions';
 const addContactMore = (state, action) => {
     if (
         state && state.find(contact => action.payload.contact.name === contact.name)
-    ) {
+    ) { alert('Такой пользователь уже есть в Вашей телефонной книге!!!');
         return state;
       }else{
         return [...state, action.payload.contact];
