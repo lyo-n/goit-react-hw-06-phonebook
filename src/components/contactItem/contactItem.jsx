@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import actions from '../../redux/contacts/actions';
 import propTypes from 'prop-types';
 
+
 const ContactItem = 
-    ({ contact: { id, name, number }, removeContact }) => {
-        return(
+    ({ contact: {name, number }, removeContact }) => {
+            return(
             <li className={styles.item}>
             {name}: {number}
             {<button className={styles.btn} type="button" name="delete" onClick={removeContact}>Delete</button>}

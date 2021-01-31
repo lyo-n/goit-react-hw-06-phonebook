@@ -7,14 +7,15 @@ import Logo from './logo/logo';
 import  './app/app.module.css';
 import { connect } from 'react-redux';
 
-const APP = ({ contacts}) =>{
+const APP = () =>{
     return (
         <div>
         <Logo />
         <ContactForm />
-        {contacts && contacts.length > 1 && <Filter />}
         <h2>Contacts</h2>
+        <Filter/>
         <ContactList />
+        
     </div>
     );
 }

@@ -8,15 +8,23 @@ class ContactForm extends Component {
     state = {
         name: '',
         number: '',
-      };
-
+        isAddDisable: true
+    };
+  
     change = (e) => {
         const {name, value} = e.target;
         this.setState({
             [name] : value,
-        });
+        }, this.setIsAddEnable);
     };
     
+    setIsAddEnable = () => {
+        const { name, number } = this.state;
+        this.setState({
+          isAddDisable: name === '' || number === ''
+        });
+      }
+
     inputSubmit = (e) => {
         e.preventDefault();
         const { name, number } = this.state;
@@ -25,7 +33,7 @@ class ContactForm extends Component {
     };
 
     render() {
-        const { name, number } = this.state;
+        const { name, number, isAddDisable } = this.state;
         return (
             <form onSubmit={this.inputSubmit} className={styles.form}> 
                 <div className={styles.formBlock}>
@@ -35,7 +43,7 @@ class ContactForm extends Component {
                             type="text"
                             name="name"
                             value={name}     
-                            onChange={this.change}   
+                            onChange={this.change}                              
                     />
                 </label>
                 <label className={styles.label}>
@@ -48,7 +56,7 @@ class ContactForm extends Component {
                     />
                 </label>
                 </div>
-                <button className={styles.btn} type="submit">Add contact</button>
+                <button className={styles.btn} type="submit" onClick={this.change} disabled = {isAddDisable}>Add contact</button>
             </form>
         );
     }
@@ -58,6 +66,4 @@ ContactForm.propTypes = {
     addContact: propTypes.func.isRequired
 };
 
-export default connect(null, {
-    onSubmit: actions.addContact,
-})(ContactForm);
+export default connect(null, {onSubmit: actions.addContact,})(ContactForm);
